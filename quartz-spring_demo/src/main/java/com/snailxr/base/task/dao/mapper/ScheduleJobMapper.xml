@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.snailxr.base.task.dao.ScheduleJobMapper">
+	<resultMap id="BaseResultMap" type="com.snailxr.base.task.domain.ScheduleJob">
+		<id column="job_id" property="jobId" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="job_name" property="jobName" jdbcType="VARCHAR" />
+		<result column="job_group" property="jobGroup" jdbcType="VARCHAR" />
+		<result column="job_status" property="jobStatus" jdbcType="VARCHAR" />
+		<result column="cron_expression" property="cronExpression"
+			jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="bean_class" property="beanClass" jdbcType="VARCHAR" />
+		<result column="is_concurrent" property="isConcurrent"
+			jdbcType="VARCHAR" />
+		<result column="spring_id" property="springId" jdbcType="VARCHAR" />
+		<result column="method_name" property="methodName" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		job_id, create_time, update_time, job_name, job_group, job_status,
+		cron_expression,
+		description, bean_class, is_concurrent, spring_id, method_name
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from task_schedule_job
+		where job_id = #{jobId,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from task_schedule_job
+		where job_id = #{jobId,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.snailxr.base.task.domain.ScheduleJob">
+		insert into task_schedule_job (job_id, create_time, update_time,
+		job_name, job_group, job_status,
+		cron_expression, description, bean_class,
+		is_concurrent, spring_id, method_name
+		)
+		values (#{jobId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP},
+		#{jobName,jdbcType=VARCHAR}, #{jobGroup,jdbcType=VARCHAR}, #{jobStatus,jdbcType=VARCHAR},
+		#{cronExpression,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+		#{beanClass,jdbcType=VARCHAR},
+		#{isConcurrent,jdbcType=VARCHAR}, #{springId,jdbcType=VARCHAR}, #{methodName,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.snailxr.base.task.domain.ScheduleJob">
+		insert into task_schedule_job
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="jobId != null">
+				job_id,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="jobName != null">
+				job_name,
+			</if>
+			<if test="jobGroup != null">
+				job_group,
+			</if>
+			<if test="jobStatus != null">
+				job_status,
+			</if>
+			<if test="cronExpression != null">
+				cron_expression,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="beanClass != null">
+				bean_class,
+			</if>
+			<if test="isConcurrent != null">
+				is_concurrent,
+			</if>
+			<if test="springId != null">
+				spring_id,
+			</if>
+			<if test="methodName != null">
+				method_name,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="jobId != null">
+				#{jobId,jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="jobName != null">
+				#{jobName,jdbcType=VARCHAR},
+			</if>
+			<if test="jobGroup != null">
+				#{jobGroup,jdbcType=VARCHAR},
+			</if>
+			<if test="jobStatus != null">
+				#{jobStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="cronExpression != null">
+				#{cronExpression,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="beanClass != null">
+				#{beanClass,jdbcType=VARCHAR},
+			</if>
+			<if test="isConcurrent != null">
+				#{isConcurrent,jdbcType=VARCHAR},
+			</if>
+			<if test="springId != null">
+				#{springId,jdbcType=VARCHAR},
+			</if>
+			<if test="methodName != null">
+				#{methodName,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.snailxr.base.task.domain.ScheduleJob">
+		update task_schedule_job
+		<set>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="jobName != null">
+				job_name = #{jobName,jdbcType=VARCHAR},
+			</if>
+			<if test="jobGroup != null">
+				job_group = #{jobGroup,jdbcType=VARCHAR},
+			</if>
+			<if test="jobStatus != null">
+				job_status = #{jobStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="cronExpression != null">
+				cron_expression = #{cronExpression,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="beanClass != null">
+				bean_class = #{beanClass,jdbcType=VARCHAR},
+			</if>
+			<if test="isConcurrent != null">
+				is_concurrent = #{isConcurrent,jdbcType=VARCHAR},
+			</if>
+			<if test="springId != null">
+				spring_id = #{springId,jdbcType=VARCHAR},
+			</if>
+			<if test="methodName != null">
+				method_name = #{methodName,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where job_id = #{jobId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.snailxr.base.task.domain.ScheduleJob">
+		update task_schedule_job
+		set create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_time = #{updateTime,jdbcType=TIMESTAMP},
+		job_name = #{jobName,jdbcType=VARCHAR},
+		job_group = #{jobGroup,jdbcType=VARCHAR},
+		job_status = #{jobStatus,jdbcType=VARCHAR},
+		cron_expression = #{cronExpression,jdbcType=VARCHAR},
+		description = #{description,jdbcType=VARCHAR},
+		bean_class = #{beanClass,jdbcType=VARCHAR},
+		is_concurrent = #{isConcurrent,jdbcType=VARCHAR},
+		spring_id = #{springId,jdbcType=VARCHAR},
+		method_name = #{methodName,jdbcType=VARCHAR}
+		where job_id = #{jobId,jdbcType=BIGINT}
+	</update>
+	<select id="getAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from task_schedule_job
+	</select>
+</mapper>
